@@ -1,8 +1,10 @@
 package com.example.android.sunshine.app;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,6 +13,7 @@ import android.view.ViewGroup;
 
 
 public class MainActivity extends ActionBarActivity {
+    String msg = "Android : ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +24,37 @@ public class MainActivity extends ActionBarActivity {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
+        Log.d(msg, "The onCreate() event");
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        Log.d(msg, "The onStart() event");
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        Log.d(msg, "The onResume() event");
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        Log.d(msg, "The onPause() event");
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        Log.d(msg, "The onStop() event");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(msg, "The onDestroy() event");
     }
 
     @Override
@@ -28,6 +62,14 @@ public class MainActivity extends ActionBarActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+
+    public void startService(View view){
+        startService(new Intent(getBaseContext(), MyService.class));
+    }
+
+    public void stopService(View view){
+        stopService(new Intent(getBaseContext(), MyService.class));
     }
 
     @Override
